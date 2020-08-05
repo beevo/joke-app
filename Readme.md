@@ -4,7 +4,7 @@
 
 This is a complete stack for running Symfony 5 into Docker containers using docker-compose tool.
 
-It is composed by 3 containers:
+It is composed by 2 containers:
 
 - `nginx`, acting as the webserver.
 - `php`, the PHP-FPM container with the 7.4 PHPversion.
