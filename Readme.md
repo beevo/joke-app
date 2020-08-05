@@ -1,4 +1,4 @@
-# 🐳 Docker + PHP 7.4 + MySQL + Nginx + Symfony 5 Boilerplate
+# Docker + PHP 7.4 + Nginx + Symfony 5 Joke App
 
 ## Description
 
@@ -8,27 +8,26 @@ It is composed by 3 containers:
 
 - `nginx`, acting as the webserver.
 - `php`, the PHP-FPM container with the 7.4 PHPversion.
-- `db` which is the MySQL database container with a **MySQL 8.0** image.
 
 ## Installation
 
-1. 😀 Clone this rep.
+1. Clone this repo.
 
 2. Run `docker-compose up -d`
 
-3. The 3 containers are deployed: 
+3. The 2 containers are deployed: 
 
 ```
-Creating symfony-docker_db_1    ... done
 Creating symfony-docker_php_1   ... done
 Creating symfony-docker_nginx_1 ... done
 ```
 
-4. Use this value for the DATABASE_URL environment variable of Symfony:
-
+4. Install Symfony composer dependencies
 ```
-DATABASE_URL=mysql://app_user:helloworld@db:3306/app_db?serverVersion=5.7
+docker exec -it  joke-app_php_1 bash 
+composer install
 ```
 
-You could change the name, user and password of the database in the `env` file at the root of the project.
+## References
+Used https://medium.com/@ger86/how-to-integrate-docker-into-a-symfony-based-project-f06164dc7944 for direction in setting up docker container.
 
