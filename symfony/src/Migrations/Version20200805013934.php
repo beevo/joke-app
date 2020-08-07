@@ -35,8 +35,43 @@ final class Version20200805013934 extends AbstractMigration
 
     public function postUp(Schema $schema) : void
     {
+        $data = [
+            ['laughs' => 0,
+            'setup' => 'What do birds give out on Halloween?',
+            'punchline' => 'Tweets.'],
+            ['laughs' => 24,
+            'setup' => 'A SQL query walks into a bar, walks up to two tables and asks...',
+            'punchline' => 'Can I join you?' ],
+            ['laughs' => 284,
+            'setup' => 'What\'s the difference between a guitar and a fish?',
+            'punchline' => "You can tune a guitar but you can't tuna fish"],
+            ['laughs' => 323,
+            'setup' => 'Why can’t you hear a pterodactyl go to the bathroom?',
+            'punchline' => 'The p is silent.'],
+            ['laughs' => 287,
+            'setup' => "What's the worst part about being a cross-eyed teacher?",
+            'punchline' => "They can't control their pupils."],
+            ['laughs' => 361,
+            'setup' => 'Why do crabs never give to charity?',
+            'punchline' => 'Because they’re shellfish.'],
+            ['laughs' => 315,
+            'setup' => 'Why are graveyards so noisy?',
+            'punchline' => 'Because of all the coffin.'],
+            ['laughs' => 316,
+            'setup' => 'Why are mummys scared of vacation?',
+            'punchline' => 'They\'re afraid to unwind.'],
+            ['laughs' => 333,
+            'setup' => 'Why did the Clydesdale give the pony a glass of water?',
+            'punchline' => 'Because he was a little horse!'],
+            ['laughs' => 120,
+            'setup' => 'How do hens stay fit?',
+            'punchline' => 'They always egg-cercise!']
+        ];
+        foreach($data as $d){
         // This will pre-populate some joke data into the database after the tabe has been created (after the up function has been called)
-        $this->connection->insert('joke', ['id' => 1, 'setup' => 'Foo', 'punchline' => 'Bar', 'laughs' => 1]);
+        $this->connection->insert('joke', $d);
+        }
+
     }
 
     
