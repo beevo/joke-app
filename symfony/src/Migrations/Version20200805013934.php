@@ -32,4 +32,12 @@ final class Version20200805013934 extends AbstractMigration
 
         $this->addSql('DROP TABLE joke');
     }
+
+    public function postUp(Schema $schema) : void
+    {
+        // This will pre-populate some joke data into the database after the tabe has been created (after the up function has been called)
+        $this->connection->insert('joke', ['id' => 1, 'setup' => 'Foo', 'punchline' => 'Bar', 'laughs' => 1]);
+    }
+
+    
 }
