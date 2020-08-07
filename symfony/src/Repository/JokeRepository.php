@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Joke;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method Joke|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,10 +15,56 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class JokeRepository extends ServiceEntityRepository
 {
+    public static $minPerPage = 1;
+    public static $maxPerPage = 100;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Joke::class);
     }
+    
+    // /**
+    //  * @return int Returns the max amount of jokes per page
+    //  */
+    public function getMaxPerPage()
+    {
+        return self::$maxPerPage;
+    }
+
+    // /**
+    //  * @return int Returns the min amount of jokes per page
+    //  */
+    public function getMinPerPage()
+    {
+        return self::$minPerPage;
+    }
+        
+    // /**
+    //  * @return Joke[] Returns an array of Joke objects based on pagination paramters
+    //  */
+    public function findByPage($page, $perPage)
+    {
+        $firstResults = ($page - 1)*$perPage;
+        return $this->createQueryBuilder('j')
+            ->setFirstResult($firstResults)
+            ->setMaxResults($perPage)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+    // /**
+    //  * @return int Returns the total count of all jokes in repo
+    //  */
+    public function getTotal()
+    {
+        return intval($this->createQueryBuilder('j')
+            ->select('count(j.id)')
+            ->getQuery()
+            ->getSingleScalarResult())
+        ;
+    }
+    
 
     // /**
     //  * @return Joke[] Returns an array of Joke objects
