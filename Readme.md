@@ -28,6 +28,11 @@ docker exec -it  joke-app_php_1 bash
 composer install
 ```
 
+5. Migrate database
+```
+php bin/console doctrine:migrations:migrate
+```
+
 ## References
 Used https://medium.com/@ger86/how-to-integrate-docker-into-a-symfony-based-project-f06164dc7944 for direction in setting up docker container.
 
