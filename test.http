@@ -1,0 +1,18 @@
+### List Jokes
+GET http://localhost/api/jokes
+
+### Create Joke
+GET http://localhost/api/jokes/create
+
+### View Joke
+GET http://localhost/api/jokes/1
+
+### Update Joke
+GET http://localhost/api/jokes/1
+
+
+### Delete Joke
+GET http://localhost/api/jokes/delete/2
+
+
+
