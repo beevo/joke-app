@@ -10,6 +10,11 @@ It is composed by 3 containers:
 - `php`, the PHP-FPM container with the 7.4 PHPversion.
 - `node`, the node container which holds the React Application to consume the API. (Not complete, example only)
 
+Note that the react app has not been completed. Have react as a part of the docker container is for demostration only. For my work in react, see:
+- https://gitlab.com/beevo/coco-orders/-/tree/dev
+- https://github.com/beevo/boss (Sample: https://beevo.github.io/boss/) 
+
+
 ## Installation
 
 1. Clone this repo.
