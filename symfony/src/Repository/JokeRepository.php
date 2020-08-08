@@ -42,14 +42,24 @@ class JokeRepository extends ServiceEntityRepository
     // /**
     //  * @return Joke[] Returns an array of Joke objects based on pagination paramters
     //  */
-    public function findByPage($page, $perPage)
+    public function findByPage($page, $perPage, $keywords = '')
     {
         $firstResults = ($page - 1)*$perPage;
-        return $this->createQueryBuilder('j')
+        $query = $this->createQueryBuilder('j')
             ->setFirstResult($firstResults)
-            ->setMaxResults($perPage)
-            ->getQuery()
-            ->getResult()
+            ->setMaxResults($perPage);
+        if($keywords){
+            $words = explode(' ',$keywords);
+            foreach($words as $k => $word){
+                $word = '%'.$word.'%';
+                $query->orWhere('j.setup LIKE :setup_word'.$k)
+                    ->setParameter('setup_word'.$k, $word);
+
+                $query->orWhere('j.punchline LIKE :punchline_word'.$k)
+                    ->setParameter('punchline_word'.$k, $word);
+            }
+        }
+        return $query->getQuery()->getResult()
         ;
     }
     
@@ -69,29 +79,16 @@ class JokeRepository extends ServiceEntityRepository
     // /**
     //  * @return Joke[] Returns an array of Joke objects
     //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('j')
-            ->andWhere('j.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('j.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    public function findRandom()
+    {   $conn = $this->getEntityManager()->getConnection();
 
-    /*
-    public function findOneBySomeField($value): ?Joke
-    {
-        return $this->createQueryBuilder('j')
-            ->andWhere('j.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $sql = '
+            SELECT *
+            FROM joke
+            ORDER BY RANDOM() 
+            LIMIT 1';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
-    */
 }

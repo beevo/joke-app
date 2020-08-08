@@ -1,18 +1,36 @@
 ### List Jokes
-GET http://localhost/api/jokes
+GET http://localhost/api/jokes?perPage=5&q=birds%20fish
 
 ### Create Joke
-GET http://localhost/api/jokes/create
+POST http://localhost/api/jokes HTTP/1.1
+content-type: application/json
+
+{
+    "setup" : "Something Funny?",
+    "punchline": "Something Funny!"
+}
+
+### Update Joke
+PATCH http://localhost/api/jokes/11 HTTP/1.1
+content-type: application/json
+
+{
+    "setup" : "Something not Funny?"
+}
+
 
 ### View Joke
 GET http://localhost/api/jokes/1
 
-### Update Joke
-GET http://localhost/api/jokes/1
+
+### View Random Joke
+GET http://localhost/api/jokes/random
+
+
 
 
 ### Delete Joke
-GET http://localhost/api/jokes/delete/2
+DELETE http://localhost/api/jokes/delete/12
 
 
 
