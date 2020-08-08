@@ -1,4 +1,4 @@
-# Docker + PHP 7.4 + Nginx + Symfony 5 Joke App
+# Joke App for Borrow Works
 
 ## Description
 
